@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+<!-- Header -->
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container mx-auto px-4 py-8 flex-1">
+  <h1 class="text-3xl font-bold text-center mb-6">Search Menu Items</h1>
+
+  <!-- Search and Filter Section -->
+  <form method="get" action="/menu/search" class="mb-6 flex flex-wrap items-center space-x-4 justify-center">
+    <!-- Search Bar -->
+    <input
+            type="text"
+            name="keyword"
+            placeholder="Search menu items..."
+            th:value="${keyword}"
+            class="shadow appearance-none border rounded w-1/3 py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+    />
+
+    <!-- Category Filter -->
+    <select
+            name="category"
+            th:value="${selectedCategory}"
+            class="shadow border rounded py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+      <option value="All" th:selected="${selectedCategory == null || selectedCategory.equals('All')}">All Categories</option>
+      <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"
+              th:selected="${selectedCategory == category}"></option>
+    </select>
+
+    <!-- Search Button -->
+    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+      Search
+    </button>
+
+    <!-- Clear Button -->
+    <a href="/menu/search" class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
+      Clear Filters
+    </a>
+  </form>
+
+  <!-- Menu Items Table -->
+  <table class="table-auto border-collapse border border-gray-300 w-full text-center">
+    <thead>
+    <tr class="bg-gray-200 text-gray-700">
+      <th class="border border-gray-300 px-4 py-2">Name</th>
+      <th class="border border-gray-300 px-4 py-2">Category</th>
+      <th class="border border-gray-300 px-4 py-2">Price</th>
+      <th class="border border-gray-300 px-4 py-2">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="menuItem : ${menuItems}">
+      <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.name}"></td>
+      <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.category}"></td>
+      <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.price}"></td>
+      <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.description}">No Description</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div th:insert="fragments/footer :: footer"></div>
+
+</body>
+</html>

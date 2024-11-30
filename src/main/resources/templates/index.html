@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlgoEats - Home</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+
+<!-- Include Header Fragment -->
+<div th:insert="fragments/header :: header"></div>
+
+<!-- Hero Section -->
+<section class="relative bg-cover bg-center h-screen text-white flex items-center justify-center"
+         style="background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&q=80&w=2070&fit=crop');">
+  <div class="absolute inset-0 bg-black opacity-50"></div>
+  <div class="relative z-10 text-center px-4">
+    <h1 class="text-5xl font-extrabold mb-6">Welcome to AlgoEats</h1>
+    <p class="text-xl mb-8">Where food meets passion. Enjoy the best dining experience with us!</p>
+    <a href="/menu" class="bg-red-600 text-white px-8 py-3 rounded-full text-lg hover:bg-red-700">
+      Explore Our Menu
+    </a>
+  </div>
+</section>
+
+<!-- Our Menu Section -->
+<section class="py-16">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-8">Our Menu</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Loop Through Menu Items -->
+      <div th:each="menuItem : ${menuItems}" class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-4 text-center">
+          <h3 class="text-lg font-semibold mb-2" th:text="${menuItem.name}">Menu Item Name</h3>
+          <p class="text-gray-600 mb-4" th:text="${menuItem.description}">Description of the item</p>
+          <p class="text-red-600 font-bold" th:text="'$' + ${menuItem.price}">Price</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- More Button -->
+    <div class="text-center mt-8">
+      <a href="/menu" class="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-600">
+        View Full Menu
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Customer Reviews Section -->
+<section class="bg-gray-100 py-16">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-8">Customer Reviews</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Review 1 -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="text-gray-600 mb-4">"Absolutely loved the food! The Grilled Chicken is a must-try."</p>
+        <p class="text-red-600 font-bold">- Alex Johnson</p>
+      </div>
+      <!-- Review 2 -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="text-gray-600 mb-4">"The Margherita Pizza is just perfect. Great taste and fresh ingredients."</p>
+        <p class="text-red-600 font-bold">- Priya Sharma</p>
+      </div>
+      <!-- Review 3 -->
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <p class="text-gray-600 mb-4">"I loved the ambiance and the desserts. The Chocolate Lava Cake was heavenly!"</p>
+        <p class="text-red-600 font-bold">- Daniel Martinez</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Include Footer Fragment -->
+<div th:insert="fragments/footer :: footer"></div>
+
+</body>
+</html>
