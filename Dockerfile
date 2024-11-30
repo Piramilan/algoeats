@@ -10,7 +10,7 @@ RUN mvn clean package -DskipTests
 #
 # Package stage
 #
-FROM openjdk:17-jdk-alpine AS runtime
+FROM openjdk:23-jdk-alpine AS runtime
 WORKDIR /app
 COPY --from=build /app/target/*.jar /app/app.jar
 EXPOSE 8080
