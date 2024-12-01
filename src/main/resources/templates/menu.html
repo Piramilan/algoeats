@@ -8,43 +8,45 @@
 </head>
 <body class="bg-gray-50 flex flex-col min-h-screen">
 
-<!-- Include Header -->
-<div th:insert="fragments/header :: header"></div>
+  <!-- Include Header -->
+  <div th:insert="fragments/header :: header"></div>
 
-<div class="container mx-auto px-4 py-8 flex-1">
-  <h1 class="text-3xl font-bold mb-6 text-center">Menu Items</h1>
-  <a href="/menu/add" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-green-600">Add Menu Item</a>
-  <a href="/menu/search" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-blue-600">Search Menu Item</a>
+  <div class="container mx-auto px-4 py-8 flex-1">
+    <h1 class="text-3xl font-bold mb-6 text-center">Menu Items</h1>
+    <a href="/menu/add" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-green-600">Add Menu Item</a>
+    <a href="/menu/search" class="bg-blue-500 text-white px-4 py-2 rounded mb-4 inline-block hover:bg-blue-600">Search Menu Item</a>
 
-  <!-- Loop Through Categories -->
-  <div th:each="category : ${groupedMenuItems}">
-    <h2 class="text-2xl font-semibold mb-4 text-gray-700" th:text="${category.key}"></h2>
-    <table class="table-auto border-collapse border border-gray-300 w-full text-center mb-8">
-      <thead>
-      <tr class="bg-gray-200 text-gray-700">
-        <th class="border border-gray-300 px-4 py-2">Name</th>
-        <th class="border border-gray-300 px-4 py-2">Price</th>
-        <th class="border border-gray-300 px-4 py-2">Description</th>
-        <th class="border border-gray-300 px-4 py-2">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="menuItem : ${category.value}">
-        <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.name}"></td>
-        <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.price}"></td>
-        <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.description}">No Description</td>
-        <td class="border border-gray-300 px-4 py-2">
-          <a th:href="@{/menu/edit/{id}(id=${menuItem.id})}" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</a>
-          <a th:href="@{/menu/delete/{id}(id=${menuItem.id})}" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <!-- Loop Through Categories -->
+    <div th:each="category : ${groupedMenuItems}">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-700" th:text="${category.key}"></h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full border-collapse border border-gray-300 text-center mb-8">
+          <thead>
+            <tr class="bg-gray-200 text-gray-700">
+              <th class="border border-gray-300 px-4 py-2">Name</th>
+              <th class="border border-gray-300 px-4 py-2">Price</th>
+              <th class="border border-gray-300 px-4 py-2">Description</th>
+              <th class="border border-gray-300 px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="menuItem : ${category.value}">
+              <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.name}"></td>
+              <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.price}"></td>
+              <td class="border border-gray-300 px-4 py-2" th:text="${menuItem.description}">No Description</td>
+              <td class="border border-gray-300 px-4 py-2">
+                <a th:href="@{/menu/edit/{id}(id=${menuItem.id})}" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</a>
+                <a th:href="@{/menu/delete/{id}(id=${menuItem.id})}" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- Include Footer -->
-<div th:insert="fragments/footer :: footer"></div>
+  <!-- Include Footer -->
+  <div th:insert="fragments/footer :: footer"></div>
 
 </body>
 </html>
